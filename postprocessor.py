@@ -8,7 +8,7 @@ plugin_type = (TYPE_INTERACTIVE,)
 def config_hook(conduit):
     parser = conduit.getOptParser()
     parser.add_option('', '--post-process', dest='postprocess', action='store_true',
-           default=True, help="show pending package changes as JSON")
+           default=True, help="Run an external command with change details everytime yum changes installed package state")
 
 
 def posttrans_hook(conduit):
