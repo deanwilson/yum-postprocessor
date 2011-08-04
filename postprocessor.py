@@ -14,7 +14,7 @@ def config_hook(conduit):
 def posttrans_hook(conduit):
     opts, commands = conduit.getCmdLine()
 
-    command = conduit.confString("main", "command", default=None)
+    command = conduit.confString("main", "command", default=None).split()
 
     if opts.postprocess:
         action   = commands[0]
@@ -48,10 +48,12 @@ def posttrans_hook(conduit):
         for package in packages:
             if action in [ "install", "remove" ]:
                 details = "action=%s name=%s version=%s" % ( packages[package]["action"], package, packages[package]["pending"] )
-                subprocess.call([ command, details])
+                command.append( details )
 
 
             if action in [ "update", "downgrade" ]:
                 details = "action=%s name=%s version=%s pending=%s" % \
                      ( packages[package]["action"], package, packages[package]["current"], packages[package]["pending"] )
-                subprocess.call([ command, details])
+                command.append( details )
+
+            subprocess.call( command )
