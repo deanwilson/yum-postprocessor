@@ -46,7 +46,7 @@ def posttrans_hook(conduit):
 
 
         for package in packages:
-            if action in [ "install", "remove", "reinstall", "localinstall" ]:
+            if action in [ "install", "remove", "erase", "reinstall", "localinstall" ]:
                 details = "action=%s name=%s version=%s" % ( packages[package]["action"], package, packages[package]["pending"] )
                 command.append( details )
 
